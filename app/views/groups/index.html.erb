@@ -1,0 +1,11 @@
+<h1> Groups </h1>
+
+
+<% groups.each do |group| %>
+	<ul><%= group.name %>
+		 <% group.users.each do |user| %>
+		 	<li> <%= user.fname %></li>
+		 <% end %>
+	</ul>
+<% end %>
+

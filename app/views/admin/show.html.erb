@@ -1,0 +1,86 @@
+Hello Admin <%= admin.fname %> <br>
+
+<h1> Users </h1>
+<table style="width:100%">
+	<tr>
+		<th> First Name </th>
+		<th> Last Name </th>
+		<th> Age </th>
+		<th> Email </th>
+		<th> Phone # </th>
+		<th> City </th>
+		<th> State </th>
+		<th> Member Since </th>
+		<th>  </th>
+		<th>  </th>
+	</tr>
+<% users_all.each do |user| %>
+	
+	<tr> 
+		<td> <%=user.fname%> </td>
+		<td> <%=user.lname%> </td>
+		<td> <%=user.age%> </td>
+		<td> <%=user.email%> </td>
+		<td> <%=user.phone%> </td>
+		<td> <%=user.city%> </td>
+		<td> <%=user.state%> </td>
+		<td> <%=user.created_at%> </td>
+		<td> 
+			<form action="/admin/<%=admin.id%>/users/<%=user.id%>/edit" method="GET">
+			<button>Edit</button>
+				<input name="authenticity_token" value="<%= form_authenticity_token() %>" type="hidden">
+			</form> 
+
+		</td>
+		<td> 
+			<form action="/admin/<%=admin.id%>/users/<%=user.id%>" method="POST">
+				<input type="hidden" name="_method" value="delete">
+				<input name="authenticity_token" value="<%= form_authenticity_token() %>" type="hidden">
+				<button>Delete</button>
+			</form> 
+	 	</td>
+	</tr>
+<% end %>
+<table><br>
+
+<div class="groups_management" style="height:200px, display:block">
+	<h1> Groups </h1>
+	<button class="admin_edit_groups_button">Edit</button>
+	<div class="group_lists">
+		<% groups.each do |group| %>
+			<ul class="group_ul" id=<%=group.id%> ><%= group.name %>
+				 <% group.users.each do |user| %>
+				 	<li> <%= user.fname %> 
+				 		<button class="remove_user_from_group" id="<%=user.id%>" >Delete</button>
+				 	</li> 
+				 <% end %>
+			</ul>
+		<% end %>
+	</div>
+
+</div>
+
+<div class="membership_management" style="height:200px, display:block">
+	<h1> Memberships </h1>
+	<button class="admin_edit_memberships_button">Edit</button>
+	<ul class="membership_lists">
+		<% memberships.each do |mem| %>
+			<li> <%=mem.id%>: <%=mem.group_id%>, <%=mem.user_id%></li>
+		<%end%>
+	</ul>
+
+</div>
+
+
+
+
+<form method="POST" action="/session">
+	<input name="authenticity_token" value="<%= form_authenticity_token() %>" type="hidden">
+	<input name="_method" value="DELETE" type="hidden">
+  	<button class="logout_button">Logout</button>  
+</form>
+
+
+<script> var user_data = <%=raw(users_all.to_json)%> </script>
+<script> var admin_data = <%=raw(admin.to_json)%> </script>
+<script> var group_data = <%=raw(groups.to_json)%> </script>

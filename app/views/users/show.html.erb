@@ -1,0 +1,38 @@
+<div class="user_container">
+	<nav class="user_nav_bar">
+		<div class="nav_link_placeholder">
+		</div>
+
+		<div class="nav_link"><span>CHAT</span>
+		<span>SCHEDULE</span><span>PROFILE</span></div>
+
+	</nav>
+	<div class="logout">
+			<form method="POST" action="/session">
+			<input name="authenticity_token" value="<%= form_authenticity_token() %>" type="hidden">
+			<input name="_method" value="DELETE" type="hidden">
+  			<button class="logout_button">LOGOUT</button> 
+			</form>
+		</div>
+	<div class="group_name_title">
+		<h1> <span class="red_text"><%= group.name %></span> Chat </h1>
+	</div>	
+	<div class="user_chat_container">
+		<ul id="chat-log"></ul>
+		<div class="message_input">
+			<form class="chat_form">
+				<input class="chat_message" type="text" placeholder="Enter note for group">
+				<button>SEND</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script> var user_data = <%=raw(user.to_json)%> </script>
+<script> var group_data = <%=raw(group.to_json)%> </script>
+
+<% content_for(:chat) do %>
+	<script type="text/javascript">
+		initChat();
+	</script>
+<% end %>

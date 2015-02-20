@@ -1,0 +1,129 @@
+<div class="content_container">
+    <div class="background white">
+        <div id="content_wrapper">
+            <h1> <span class="title_word">CONQUER</span> YOUR NEXT 10, 20, 30+ YEARS </h1>
+        </div>
+         <button class="button title_button">HOW?</button>
+    </div>
+    <div class="background grey">
+        <div id="content_wrapper">
+            <p> WE WANT YOU TO BUILD A FOUNDATION OF <span class="red_text">HAPPY, HEALTHY LIVING</span> SO YOU CAN FOCUS ON ENJOYING YOUR LIFE. <br><br> WE SEND YOU <span class="red_text"> SAFE BUT TOUGH WORKOUTS</span> TWICE A WEEK | YOU DO THEM <span class="red_text">WITH FRIENDS</span> | WE ALL WIN  </p>
+        </div>
+        <div id="grey_subsection" class="grey_subsection_1">
+            <%= image_tag "pre_image.png" %>     
+            <p>Form small, local, close-knit groups of women so you're both comfortable and accountable</p>
+        </div>
+        <div id="grey_subsection" class="grey_subsection_2">
+            <%= image_tag "workout_image.png" %>
+             <p>Complete simple, proven workouts together, in the comfort of a home or chosen outdoor location</p>
+        </div>
+        <div id="grey_subsection" class="grey_subsection_3">
+            <%= image_tag "result_image.png" %>
+            <p>As a group, you see results and support each other between classes</p>
+        </div>
+        <button class="button tell_more_button">TELL ME MORE..</button>
+    </div>
+    <div class="background red">
+         <div id="content_wrapper">
+
+             <p> HAPPY HOUR <span class="grey_text">MEETS</span> WORKOUT CLASS <span class="grey_text">MEETS</span> BOOK CLUB</p>
+             <p>3 <span class="grey_text">MONTHS,</span> 2X <span class="grey_text"> A WEEK</span></p>
+             <p> WITH FRIENDS <span class="grey_text">OF</span> SIMILAR ABILITIES</p>
+         </div>
+         <button class="button cost_button red_background_button">COST?</button>
+    </div>
+    <div class="background blue_green">
+        <div id="content_wrapper">
+             <p> FIRST 3 MONTHS<br> <span class="white_text">FREE</span></p>
+         </div>
+         <button class="button sign_me_up_button blue_green_background_button">SIGN ME UP!</button>
+    </div>
+    <div class="background white">
+        <div class="call_to_action_wrapper">
+            <p>WANT EARLY ACCESS?</p>
+                <div class="requests_input_wrapper">
+                    <input class="requests_input" type="text" name="email" placeholder="ENTER EMAIL">
+                    <button class="requests_email_submit_button">></button>
+                </div><br>
+
+           
+           <br><br> <p>WANT SUPER EARLY ACCESS?</p>
+                <button class="button_quiz">TAKE 21 SECOND QUIZ</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+ <div class="survey">
+    <div class="survey_container">
+        <button class="close_survey">X</button>
+        <div class="survey_questions first">
+            <p class="survey_question_text">What year were you born?</p>
+            <div class="survey_input_wrapper">
+                <input class="survey_input" type="text" name="age" placeholder="Enter year">
+                <button class="survey_email_submit_button first_button">></button>
+            </div>
+        </div>
+         <div class="survey_questions second" style="display:none">
+            <p class="survey_question_text">How many times per week do you work out?</p>
+            <div class="survey_input_wrapper">
+                <input class="survey_input" type="text" name="workouts_per_week" placeholder="1-10?">
+                <button class="survey_email_submit_button second_button">></button>
+            </div>
+        </div>
+         <div class="survey_questions third" style="display:none">
+            <p class="survey_question_text">Free video classes (1) or cheap trainer classes (2)?</p>
+            <div class="survey_input_wrapper">
+                <input class="survey_input" type="text" name="instruction_style" placeholder="1 or 2">
+                <button class="survey_email_submit_button third_button">></button>
+            </div>
+        </div>
+
+    </div>
+ </div>
+
+
+
+<div class="login_signup_section" style="display:none">
+
+    <h1> Login</h1>
+
+
+    <div class="error_message">
+    	<% if @error == true %>
+    	<p>Try again... </p>
+    	<% end %>
+    </div>
+
+    <form class="login_form" action="/session" method="POST">
+    	<input type="text" name="email" placeholder="EMAIL"> 
+    	<input type="password" name="password" placeholder="PASSWORD">
+    	<input name="authenticity_token" value="<%= form_authenticity_token() %>" type="hidden">
+    	<button>ENTER</button> 
+    </form>
+
+
+
+
+    <h1> Sign Up</h1>
+
+       
+    <form class="sign_up_form" action="/users" method="POST">
+        <input type="text" name="fname" placeholder="First Name">
+        <input type="text" name="lname" placeholder="Last Name">
+        <input type="text" name="email" placeholder="Email">
+        <input type="text" name="password" placeholder="Password">
+        <input type="text" name="city" placeholder="City">
+        <input type="text" name="state" placeholder="State">
+        <input type="text" name="Age" placeholder="Age">
+        <input type="text" name="phone" placeholder="Phone Number">
+        <input name="authenticity_token" value="<%= form_authenticity_token() %>" type="hidden">
+        <button>Sign Up</button> 
+    </form>
+
+</div>
+
+
+
+
