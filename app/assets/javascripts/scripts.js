@@ -168,6 +168,7 @@ $('.requests_email_submit_button').on('click', function() {
 		data: {email: new_request_email}
 	}).done(function(data){
 		console.log("added email to list")
+		$('.requests_input').val("")
 	})
 })
 
