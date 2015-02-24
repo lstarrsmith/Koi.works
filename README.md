@@ -12,6 +12,7 @@ The splash page uses CSS animations, and the prototype was built in Ruby on Rail
 ## Soon to be added
 
 * Improve animation/ content on survey
+* Responsiveness
 * Refactoring of Backbone/ React 
 * Additional security features
 * Scheduling application for groups
