@@ -1,3 +1,104 @@
+$(document).ready(function(){
+
+//----------- Banner title fadein scroll------------//
+
+	var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+
+	function changeHeader() {
+		setInterval(updateHeaderText, 2500);
+	}
+
+	function updateHeaderText(){
+		var banner_text = $('.banner_headline').text()
+
+		if (banner_text === "Free movement with friends"){
+			$('.banner_headline').text("Twice a week for 30 minutes").addClass('animated fadeInDown').one(animationEnd, function(){
+				$('.banner_headline').removeClass('animated fadeInDown')
+			})
+		} else if (banner_text === "Twice a week for 30 minutes") {
+			$('.banner_headline').text("You stay active, social and comfortable").addClass('animated fadeInDown').one(animationEnd, function(){
+				$('.banner_headline').removeClass('animated fadeInDown')
+				})
+		} else if (banner_text === "You stay active, social and comfortable") {
+			$('.banner_headline').text("So you can focus on the important things").addClass('animated fadeInDown').one(animationEnd, function(){
+				$('.banner_headline').removeClass('animated fadeInDown')
+				})
+		} else if (banner_text === "So you can focus on the important things") {
+			$('.banner_headline').text("Free movement with friends").addClass('animated fadeInDown').one(animationEnd, function(){
+				$('.banner_headline').removeClass('animated fadeInDown')
+				})
+		}
+	}
+
+	changeHeader();
+
+
+	// -----------background image change -------------/
+		var image_classes = [
+			'hula',
+			'hiking',
+			'kites',
+			'walking'
+		]
+
+		var curImage = 0;
+		setInterval(changeImage, 2500);
+
+		function changeImage(){
+			if (curImage == image_classes.length){
+				curImage = 0
+			}
+			if (curImage < 3 ) {
+				$('.banner').removeClass(image_classes[curImage]).addClass(image_classes[curImage+1])
+				curImage++;
+			} else {
+				$('.banner').removeClass(image_classes[curImage]).addClass(image_classes[0])
+				curImage++;
+			}
+
+			
+		}
+
+
+// ------------ Scroll Events --------------------------//
+
+$(window).on('scroll', function() {
+	var scrolled = $(window).scrollTop();
+	
+	// top nav bar control
+	if (scrolled > 5){
+		if (!$('.navbar').hasClass('condense')) {
+			$('.navbar').addClass('condense');
+		} 	
+	} else {
+		if ($('.navbar').hasClass('condense')) {
+			$('.navbar').removeClass('condense');
+		}
+	}
+
+	scroll_before_sign_up = $('.banner').height() + $('#how_it_works').height() + $('#spectrum').height() 
+	
+
+	if (scrolled > scroll_before_sign_up) {
+		var opacity = 1- ((scrolled - scroll_before_sign_up) / 200)
+		$('.content_footer').css('opacity', opacity)
+		
+	} else {
+		$('.content_footer').css('opacity', "1")
+	}
+	// footer call to action control
+
+
+	
+})
+
+
+
+})
+
+
+// ----------------CHAT ON USER PAGE ----------//
+
 
 // Chat function using Firebase only called on the users/:id show page
 
@@ -44,65 +145,7 @@ $('.remove_user_from_group').on("click", function(event) {
 		)
 })
 
-// --------------- Survey ---------------------------//
 
-$('.button_quiz').on('click', function(){
-	$('.survey').css('display','block').removeClass('inactive').addClass('active');
-	$('.content_container').hide();
-})
-
-$('.close_survey').on('click', function() {
-	$('.content_container').show();
-	$('.survey').css('display', 'none').removeClass('active').addClass('inactive');
-})
-
-$('.survey_input').on('keyup', function() {
-	if ($('.survey_input').val() !== "") {
-		$('.survey_email_submit_button').show()
-	} else {
-		$('.survey_email_submit_button').hide()
-	}
-})
-
-$('.survey_email_submit_button.first_button').on('click', function(){
-	var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend'
-	$('.survey_questions.first').addClass('animated zoomOutLeft').one(animationEnd, function(){
-		$('.survey_questions.second').css('display', 'block').addClass('animated zoomInRight')
-				})
-		}
-	)
-
-$('.survey_email_submit_button.second_button').on('click', function() {
-		var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-		$('.survey_questions.second').addClass('animated zoomOutLeft').one(animationEnd, function() {
-			$('.survey_questions.third').css('display', 'block').addClass('animated zoomInRight')
-			})
-		}
-	)
-
-$('.survey_email_submit_button.third_button').on('click', function() {
-	$('.content_container').show();
-	$('.survey').css('display', 'none').removeClass('active').addClass('inactive');
-
-})
-
-// // --------------- Scroll Events ---------------------------//
-
-$(window).on('scroll', function() {
-	var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend'
-	var scrolled = $(window).scrollTop();
-	if (scrolled > 5 && scrolled < 640){
-		$('.background.grey').children().children('p').addClass('animated fadeIn').one(animationEnd, $('.background.grey').children().children('img').addClass('animated zoomInRight') )
-	} else if (scrolled > 643 && scrolled < 1290) {
-		$('.background.red').children().children('p').addClass('animated fadeIn')
-	} else if (scrolled > 1295 && scrolled < 1915) {
-		$('.background.blue_green').children().children('p').addClass('animated zoomInRight')
-	} else if (scrolled > 1915) {
-		$('.background.white').children().children('button:last').addClass('animated bounce infinite')
-	}
-
-})
-	
 
 // --------------- Show LOGIN SIGNUP ---------------------------//
 
@@ -115,35 +158,6 @@ $(window).on('keyup', function(e){
 
 
 
-
-// --------------- Changing the title word ---------------------------//
-
-			function changeTitle() {
-			  nIntervId = setInterval(flashText, 2000);
-			}
-
-			function flashText(){
-				var title_word = $('.title_word').text()
-				if (title_word === "CONQUER") {
-					$('.title_word').text("INSPIRE") 
-				} else if (title_word === "INSPIRE") {
-					$('.title_word').text("FOCUS")
-				} else if (title_word === "FOCUS") {
-					$('.title_word').text("UPGRADE")
-				} else if (title_word === "UPGRADE") {
-					$('.title_word').text("CONQUER")
-				}
-			}
-
-			function stopChangeTitle() {
-				clearInterval(nIntervId);
-			}
-
-			changeTitle();
-
-			$('.title_button').on('click', stopChangeTitle)
-
-
 // --------------- Request Submission ---------------------------//
 
 if (!String.prototype.includes) {
@@ -151,6 +165,8 @@ if (!String.prototype.includes) {
     return String.prototype.indexOf.apply(this, arguments) !== -1;
   };
 }
+
+// need wrap this in a function to use elsewhere for consistency
 
 $('.requests_input').on('keyup', function() {
 	if ($('.requests_input').val().includes('@')) {
@@ -161,6 +177,8 @@ $('.requests_input').on('keyup', function() {
 })
 
 $('.requests_email_submit_button').on('click', function() {
+	$('#sign_up div').hide()
+	$('.requests_input').val("")
 	var new_request_email = $('.requests_input').val()
 	$.ajax({
 		url: '/requests',
@@ -168,7 +186,8 @@ $('.requests_email_submit_button').on('click', function() {
 		data: {email: new_request_email}
 	}).done(function(data){
 		console.log("added email to list")
-		$('.requests_input').val("")
+		$('#sign_up h3').text("Thanks! We'll be in touch when we're ready for you!").addClass('animated flipInX')	
+		$('.content_footer').hide();
 	})
 })
 
@@ -176,20 +195,24 @@ $('.requests_email_submit_button').on('click', function() {
 // --------------- SCROLLING DOWN SPLASH PAGE ---------------------------//
 
 
-$(".title_button").click(function() {
-   $('html,body').animate({scrollTop: $('.grey').offset().top},'slow');
+$("#logo").click(function() {
+   $('html,body').animate({scrollTop: $('.banner').offset().top},'slow');
 });
 
-$(".cost_button").click(function() {
-   $('html,body').animate({scrollTop: $('.blue_green').offset().top},'slow');
+$(".how_it_works_nav").click(function() {
+   $('html,body').animate({scrollTop: $('#how_it_works').offset().top},'slow');
 });
 
-$(".tell_more_button").click(function() {
-   $('html,body').animate({scrollTop: $('.red').offset().top},'slow');
+$(".examples_nav").click(function() {
+   $('html,body').animate({scrollTop: $('#spectrum').offset().top},'slow');
 });
 
-$(".sign_me_up_button").click(function() {
-   $('html,body').animate({scrollTop: $('.call_to_action_wrapper').offset().top},'slow');
+$(".sign_up_nav").click(function() {
+   $('html,body').animate({scrollTop: $('#sign_up').offset().top},'slow');
+});
+
+$(".content_footer").click(function() {
+   $('html,body').animate({scrollTop: $('#sign_up').offset().top},'slow');
 });
 
 
