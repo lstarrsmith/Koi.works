@@ -17,5 +17,5 @@ The splash page uses CSS animations, and the prototype was built in Ruby on Rail
 * Additional security features
 * Scheduling application for groups
 
-Live link: www.koi.works
+
 
